@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "PvPM9tm98irKEZSv5YgTb"
+uri = "file://artifacts/sdc-website/public/images/hero-bg.png"
+type = "image"
+title = "Dental clinic interior"
+
+[[generated]]
+id = "oPGBUObIVNnUcF0v8_yp8"
+uri = "file://artifacts/sdc-website/public/images/services-general.png"
+type = "image"
+title = "Dental tools close up"
+
+[[generated]]
+id = "0UHdAu84g9lj3mgqz_E5-"
+uri = "file://artifacts/sdc-website/public/images/why-us.png"
+type = "image"
+title = "Smiling person"
