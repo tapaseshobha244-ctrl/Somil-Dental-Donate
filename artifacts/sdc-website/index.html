@@ -160,20 +160,22 @@
     ======================== */
     #hero {
       min-height: 100vh;
-      background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 50%, #f0fdf4 100%);
+      background:
+        linear-gradient(135deg, rgba(240,253,250,.97) 0%, rgba(224,242,254,.93) 50%, rgba(240,253,244,.97) 100%),
+        url('https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
       display: flex; align-items: center; padding-top: 72px;
       position: relative; overflow: hidden;
     }
     #hero::before {
       content: ''; position: absolute; top: -20%; right: -10%;
       width: 60vw; height: 60vw; max-width: 700px; max-height: 700px;
-      background: radial-gradient(circle, rgba(13,148,136,.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(13,148,136,.15) 0%, transparent 70%);
       border-radius: 50%; pointer-events: none;
     }
     #hero::after {
       content: ''; position: absolute; bottom: -10%; left: -5%;
       width: 40vw; height: 40vw; max-width: 500px; max-height: 500px;
-      background: radial-gradient(circle, rgba(59,130,246,.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(59,130,246,.1) 0%, transparent 70%);
       border-radius: 50%; pointer-events: none;
     }
     .hero-inner {
@@ -339,9 +341,56 @@
     .service-card:hover .service-icon { background: var(--primary); color: white; }
     .service-card h3 { font-size: 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; margin-bottom: 10px; color: var(--dark); }
     .service-card p { font-size: 14px; color: var(--dark-500); line-height: 1.7; margin-bottom: 16px; }
-    .service-link { font-size: 13px; color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 4px; }
-    .service-link i { transition: transform var(--transition); font-size: 11px; }
-    .service-card:hover .service-link i { transform: translateX(4px); }
+    .service-price {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--primary-50); color: var(--primary-dark);
+      border: 1px solid var(--primary-100); border-radius: 50px;
+      font-size: 13px; font-weight: 700; padding: 5px 12px;
+      margin-bottom: 14px;
+    }
+    .service-price i { font-size: 11px; }
+    .service-book-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--primary);
+      padding: 0; background: none; border: none; cursor: pointer;
+      transition: var(--transition);
+    }
+    .service-book-btn i { transition: transform var(--transition); font-size: 11px; }
+    .service-card:hover .service-book-btn { color: var(--primary-dark); }
+    .service-card:hover .service-book-btn i { transform: translateX(4px); }
+
+    .services-footer {
+      margin-top: 40px; text-align: center;
+    }
+    .services-note {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--dark-500); margin-bottom: 24px;
+      background: var(--bg); padding: 10px 18px; border-radius: 50px;
+      border: 1px solid var(--dark-100);
+    }
+    .services-note i { color: var(--gold); }
+
+    /* WhatsApp button */
+    .btn-whatsapp { background: #25d366; color: var(--white); box-shadow: 0 4px 20px rgba(37,211,102,.3); }
+    .btn-whatsapp:hover { background: #1ebe5d; box-shadow: 0 6px 28px rgba(37,211,102,.4); transform: translateY(-1px); }
+
+    #wa-float {
+      position: fixed; bottom: 86px; right: 28px; z-index: 900;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #25d366; color: white; font-size: 26px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,.45);
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    #wa-float:hover { background: #1ebe5d; transform: scale(1.08); box-shadow: 0 8px 32px rgba(37,211,102,.55); }
+    #wa-float-label {
+      position: absolute; right: 64px; background: var(--dark); color: white;
+      font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 50px;
+      white-space: nowrap; pointer-events: none;
+      opacity: 0; transform: translateX(8px); transition: var(--transition);
+    }
+    #wa-float:hover #wa-float-label { opacity: 1; transform: none; }
 
     /* ========================
        HOW IT WORKS
@@ -977,64 +1026,77 @@
   <div class="container">
     <div class="section-header reveal">
       <div class="badge"><i class="fa-solid fa-briefcase-medical"></i> Our Services</div>
-      <h2>Comprehensive Dental Care</h2>
-      <p>From routine checkups to advanced cosmetic treatments, we offer complete dental services using the latest techniques and technology.</p>
+      <h2>Treatments &amp; Pricing</h2>
+      <p>Transparent, affordable dental care. All consultations include a thorough examination and personalised treatment plan.</p>
     </div>
     <div class="services-grid">
       <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon"><i class="fa-solid fa-teeth"></i></div>
-        <h3>Teeth Cleaning</h3>
-        <p>Professional scaling and polishing to remove plaque, tartar, and surface stains — leaving your teeth clean, smooth, and fresh. Recommended every 6 months.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+        <div class="service-icon"><i class="fa-solid fa-stethoscope"></i></div>
+        <h3>General Dental Checkup</h3>
+        <div class="service-price"><i class="fa-solid fa-indian-rupee-sign"></i> Starting from &#8377;100</div>
+        <p>Comprehensive oral examination with digital X-rays to detect cavities, gum disease, and other issues early. Preventive care at its best.</p>
+        <button class="service-book-btn" onclick="bookWhatsApp('General Dental Checkup')">Book Now <i class="fa-solid fa-arrow-right"></i></button>
       </div>
       <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon"><i class="fa-solid fa-tooth"></i></div>
-        <h3>Root Canal Treatment</h3>
-        <p>Modern, virtually painless root canal therapy to save infected teeth and eliminate pain. Using rotary instrumentation for precise, comfortable treatment.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+        <div class="service-icon"><i class="fa-solid fa-teeth"></i></div>
+        <h3>Teeth Cleaning (Scaling)</h3>
+        <div class="service-price"><i class="fa-solid fa-indian-rupee-sign"></i> Starting from &#8377;500</div>
+        <p>Professional scaling and polishing to remove stubborn plaque and tartar buildup, leaving your teeth smooth, fresh, and healthy. Recommended every 6 months.</p>
+        <button class="service-book-btn" onclick="bookWhatsApp('Teeth Cleaning (Scaling)')">Book Now <i class="fa-solid fa-arrow-right"></i></button>
       </div>
       <div class="service-card reveal reveal-delay-3">
-        <div class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-        <h3>Dental Implants</h3>
-        <p>Permanent tooth replacement that looks, feels, and functions like natural teeth. Titanium implants with porcelain crowns for a lifetime smile solution.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+        <div class="service-icon"><i class="fa-solid fa-fill-drip"></i></div>
+        <h3>Tooth Filling</h3>
+        <div class="service-price"><i class="fa-solid fa-indian-rupee-sign"></i> Starting from &#8377;500</div>
+        <p>Tooth-coloured composite or silver amalgam fillings to restore decayed or damaged teeth. Natural-looking results that blend seamlessly with your smile.</p>
+        <button class="service-book-btn" onclick="bookWhatsApp('Tooth Filling')">Book Now <i class="fa-solid fa-arrow-right"></i></button>
       </div>
       <div class="service-card reveal reveal-delay-4">
-        <div class="service-icon"><i class="fa-regular fa-star"></i></div>
-        <h3>Teeth Whitening</h3>
-        <p>Professional-grade whitening treatments that safely lighten teeth by up to 8 shades. In-clinic laser whitening or custom take-home whitening kits.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
-      </div>
-      <div class="service-card reveal reveal-delay-5">
-        <div class="service-icon"><i class="fa-solid fa-align-center"></i></div>
-        <h3>Braces &amp; Aligners</h3>
-        <p>Straighten your teeth with traditional metal braces, ceramic braces, or discreet clear aligners. Customised orthodontic plans for all ages.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
-      </div>
-      <div class="service-card reveal reveal-delay-6">
         <div class="service-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
         <h3>Tooth Extraction</h3>
-        <p>Safe and gentle tooth extractions including wisdom teeth removal. Sedation options available for anxious patients to ensure a comfortable experience.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+        <div class="service-price"><i class="fa-solid fa-indian-rupee-sign"></i> Starting from &#8377;500</div>
+        <p>Safe, gentle extractions including wisdom teeth removal. Local anaesthesia ensures a comfortable experience. Sedation options available for anxious patients.</p>
+        <button class="service-book-btn" onclick="bookWhatsApp('Tooth Extraction')">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="service-card reveal reveal-delay-5">
+        <div class="service-icon"><i class="fa-solid fa-tooth"></i></div>
+        <h3>Root Canal Treatment (RCT)</h3>
+        <div class="service-price"><i class="fa-solid fa-indian-rupee-sign"></i> Starting from &#8377;3,000</div>
+        <p>Modern, virtually painless RCT using rotary instrumentation to save infected teeth and eliminate pain. Most cases completed in 1–2 comfortable sessions.</p>
+        <button class="service-book-btn" onclick="bookWhatsApp('Root Canal Treatment (RCT)')">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="service-card reveal reveal-delay-6">
+        <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+        <h3>Dental Crown</h3>
+        <div class="service-price"><i class="fa-solid fa-indian-rupee-sign"></i> Starting from &#8377;1,200</div>
+        <p>Custom-fitted crowns in zirconia, PFM, or e-max porcelain to restore broken, cracked, or root-canal-treated teeth to full strength and natural appearance.</p>
+        <button class="service-book-btn" onclick="bookWhatsApp('Dental Crown')">Book Now <i class="fa-solid fa-arrow-right"></i></button>
       </div>
       <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <h3>Cosmetic Dentistry</h3>
-        <p>Transform your smile with veneers, bonding, and smile makeovers. Custom-designed aesthetics to achieve the smile you've always dreamed of.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+        <div class="service-icon"><i class="fa-solid fa-align-center"></i></div>
+        <h3>Braces &amp; Aligners</h3>
+        <div class="service-price"><i class="fa-solid fa-indian-rupee-sign"></i> Starting from &#8377;25,000</div>
+        <p>Straighten your smile with metal braces, ceramic braces, or discreet clear aligners. Customised orthodontic treatment plans for children, teens, and adults.</p>
+        <button class="service-book-btn" onclick="bookWhatsApp('Braces & Aligners')">Book Now <i class="fa-solid fa-arrow-right"></i></button>
       </div>
       <div class="service-card reveal reveal-delay-2">
         <div class="service-icon"><i class="fa-solid fa-child"></i></div>
         <h3>Paediatric Dentistry</h3>
-        <p>Specialised gentle dental care for children in a fun, welcoming environment. We make dental visits enjoyable to establish lifelong oral health habits.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+        <div class="service-price"><i class="fa-solid fa-indian-rupee-sign"></i> Starting from &#8377;200</div>
+        <p>Gentle, child-friendly dental care in a welcoming, fun environment. Kids' checkups, fluoride treatments, and habit correction to build healthy smiles early.</p>
+        <button class="service-book-btn" onclick="bookWhatsApp('Paediatric Dentistry (Kids Checkup)')">Book Now <i class="fa-solid fa-arrow-right"></i></button>
       </div>
-      <div class="service-card reveal reveal-delay-3">
-        <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
-        <h3>Dentures &amp; Crowns</h3>
-        <p>Custom-fitted dentures and dental crowns to restore function and aesthetics. High-quality materials including zirconia and e-max porcelain.</p>
-        <span class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></span>
+    </div>
+    <div class="services-footer reveal">
+      <div class="services-note">
+        <i class="fa-solid fa-circle-info"></i>
+        Prices may vary depending on the case, complexity, and consultation findings.
       </div>
+      <br>
+      <button class="btn btn-whatsapp btn-lg" onclick="bookWhatsApp('')">
+        <i class="fa-brands fa-whatsapp"></i>
+        Book Appointment via WhatsApp
+      </button>
     </div>
   </div>
 </section>
@@ -1386,17 +1448,16 @@
               <label for="patient-treatment">Treatment Required *</label>
               <select id="patient-treatment" name="treatment" required>
                 <option value="">Select a treatment</option>
-                <option>Routine Checkup &amp; Cleaning</option>
-                <option>Root Canal Treatment</option>
-                <option>Dental Implants</option>
-                <option>Teeth Whitening</option>
-                <option>Braces / Clear Aligners</option>
-                <option>Tooth Extraction</option>
-                <option>Cosmetic Dentistry / Veneers</option>
-                <option>Paediatric Dentistry</option>
-                <option>Dentures / Crowns / Bridges</option>
+                <option>General Dental Checkup — ₹100+</option>
+                <option>Teeth Cleaning (Scaling) — ₹500+</option>
+                <option>Tooth Filling — ₹500+</option>
+                <option>Tooth Extraction — ₹500+</option>
+                <option>Root Canal Treatment (RCT) — ₹3,000+</option>
+                <option>Dental Crown — ₹1,200+</option>
+                <option>Braces &amp; Aligners — ₹25,000+</option>
+                <option>Paediatric Dentistry — ₹200+</option>
                 <option>Emergency Treatment</option>
-                <option>Other</option>
+                <option>Other / Not Sure</option>
               </select>
             </div>
             <div class="form-group full">
@@ -1404,10 +1465,16 @@
               <textarea id="patient-message" name="message" placeholder="Any specific concerns or questions you'd like us to know about..."></textarea>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary form-submit btn-lg">
-            <i class="fa-regular fa-calendar-check"></i>
-            Confirm Appointment
-          </button>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+            <button type="submit" class="btn btn-primary form-submit" style="flex:1;min-width:160px;justify-content:center;">
+              <i class="fa-regular fa-calendar-check"></i>
+              Confirm Appointment
+            </button>
+            <button type="button" id="wa-book-btn" class="btn btn-whatsapp" style="flex:1;min-width:160px;justify-content:center;">
+              <i class="fa-brands fa-whatsapp"></i>
+              Book via WhatsApp
+            </button>
+          </div>
           <div id="form-success">
             <i class="fa-solid fa-circle-check" style="font-size:24px;display:block;margin-bottom:8px;"></i>
             Thank you! Your appointment request has been received.<br>We'll call you within 2 hours to confirm.
@@ -1660,6 +1727,12 @@
   </div>
 </footer>
 
+<!-- Floating WhatsApp Button -->
+<a id="wa-float" href="https://wa.me/919876543210?text=Hello%2C%20I%20want%20to%20book%20an%20appointment%20at%20Somil%20Dental%20Clinic." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <span id="wa-float-label">Chat on WhatsApp</span>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
 <!-- Scroll To Top -->
 <button id="scroll-top" aria-label="Scroll to top" title="Back to top">
   <i class="fa-solid fa-chevron-up"></i>
@@ -1717,6 +1790,24 @@
     });
   });
 
+  const WA_NUMBER = '919876543210';
+
+  function buildWAMsg(name, phone, treatment, date, note) {
+    let msg = 'Hello, I want to book an appointment at Somil Dental Clinic.\n\n';
+    if (name)      msg += 'Name: ' + name + '\n';
+    if (phone)     msg += 'Phone: ' + phone + '\n';
+    if (treatment) msg += 'Treatment: ' + treatment + '\n';
+    if (date)      msg += 'Preferred Date: ' + date + '\n';
+    if (note)      msg += 'Notes: ' + note + '\n';
+    msg += '\nPlease confirm my appointment. Thank you!';
+    return msg;
+  }
+
+  function bookWhatsApp(treatment) {
+    const msg = buildWAMsg('', '', treatment, '', '');
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  }
+
   document.getElementById('appointment-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = this.name.value.trim();
@@ -1727,9 +1818,28 @@
       showToast('Please fill in all required fields.', false);
       return;
     }
+    const note = this.message ? this.message.value.trim() : '';
+    const msg = buildWAMsg(name, phone, treatment, date, note);
     document.getElementById('form-success').style.display = 'block';
     this.reset();
-    setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 6000);
+    setTimeout(() => {
+      document.getElementById('form-success').style.display = 'none';
+      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    }, 800);
+  });
+
+  document.getElementById('wa-book-btn').addEventListener('click', function() {
+    const form = document.getElementById('appointment-form');
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const date = form.date.value;
+    const treatment = form.treatment.value;
+    const note = form.message ? form.message.value.trim() : '';
+    if (!name && !phone && !treatment) {
+      showToast('Fill in at least your name, phone, and treatment for a better WhatsApp message.', false);
+    }
+    const msg = buildWAMsg(name || 'Not provided', phone || 'Not provided', treatment || 'General Checkup', date || 'To be discussed', note);
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
   });
 
   document.getElementById('scroll-top').addEventListener('click', () => {
